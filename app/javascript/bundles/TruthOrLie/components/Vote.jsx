@@ -1,6 +1,12 @@
 import React from 'react';
+import ApiService from '../services/ApiService';
 
 export default class Vote extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.api = new ApiService();
+  }
 
   options = () => {
     return (
@@ -26,9 +32,9 @@ export default class Vote extends React.Component {
   }
 
   submitVote = (event) => {
-    // invoke API service to submit vote and call props.onUpdate when the vote has been submitted
-    // to update the internal state
-    this.props.onUpdate(event.target.value)
+    this.api.vote(event.target.value).then(response => {
+      this.props.onUpdate(response.vote)
+    })
   }
 
   render () {
