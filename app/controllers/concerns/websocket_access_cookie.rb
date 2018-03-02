@@ -6,13 +6,15 @@ module WebsocketAccessCookie
   end
 
   def set_websocket_access_cookie
-    cookies.signed[:uuid] = {
-      value: SecureRandom.uuid,
-      domain: :all
-    }
+    unless cookies.signed[:guest_uuid]
+      uuid = loop do
+        random_token = SecureRandom.uuid
+        break random_token unless Guest.exists?(uuid: random_token)
+      end
+
+      cookies.signed[:guest_uuid] = {value: uuid, domain: :all}
+      Guest.create!(uuid: uuid)
+    end
   end
 
-  def delete_websocket_access_cookie
-    cookies.delete(:current_user_id, domain: :all)
-  end
 end

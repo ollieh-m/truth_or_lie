@@ -1,11 +1,4 @@
-import ActionCable from 'actioncable';
-
 export default class ApiService {
-  constructor() {
-    // this.cable = ActionCable.createConsumer('/cable');
-    // this.subscription = false;
-  }
-
   requestTemplate = (body) => {
     return {
       method: 'post',
@@ -29,13 +22,3 @@ export default class ApiService {
     });
   }
 }
-// subscribing to actioncable:
-// client/app/bundles/Trip/services/TripApi.js
-// subscribeTrip = (viewer_uuid, callback) => {
-//   this.subscription = this.cable.subscriptions.create({
-//     channel: "TripChannel",
-//     room: viewer_uuid
-//   }, {
-//     received: callback
-//   });
-// }
