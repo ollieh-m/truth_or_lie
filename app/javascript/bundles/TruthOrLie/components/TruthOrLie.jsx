@@ -5,13 +5,13 @@ import WebSocketsService from '../services/WebSocketsService';
 
 export default class TruthOrLie extends React.Component {
   static propTypes = {
-    statement: PropTypes.string.isRequired, // this is passed from the Rails view
+    proposition: PropTypes.string.isRequired
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      statement: this.props.statement
+      proposition: this.props.proposition
     };
 
     this.websockets = new WebSocketsService();
@@ -20,8 +20,9 @@ export default class TruthOrLie extends React.Component {
 
   setupWebsockets = () => {
     this.websockets.subscribe(update => {
-      // use update to show answer/results or show new statement
-      console.log(update);
+      if(update.type === 'restart'){
+        this.updateProposition(update.proposition.truth_or_lie)
+      };
     })
   }
 
@@ -29,6 +30,14 @@ export default class TruthOrLie extends React.Component {
   // update state here by defining callbacks used in API service
   // the constructor needs to get the API service to subscribe to websockets straight away
   // use these three bits of state in three different subcomponents
+
+  updateProposition = (proposition) => {
+    this.setState({
+      ...this.state,
+      vote: null,
+      proposition: proposition
+    })
+  }
 
   updateVote = (vote) => {
     this.setState({
@@ -41,7 +50,7 @@ export default class TruthOrLie extends React.Component {
     return (
       <div>
         <h3>
-          {this.state.statement}!
+          {this.state.proposition}!
         </h3>
         <Vote onUpdate={this.updateVote} vote={this.state.vote} />
       </div>

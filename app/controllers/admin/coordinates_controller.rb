@@ -15,4 +15,16 @@ class Admin::CoordinatesController < ApplicationController
     end
   end
 
+  def restart
+    new_proposition = Proposition.activate_new_proposition
+
+    # trigger background job for this
+    Guest.all.each do |guest|
+      RevealAndRestartChannel.broadcast_to guest, {
+        type: 'restart',
+        proposition: new_proposition
+      }
+    end
+  end
+
 end

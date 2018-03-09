@@ -4,6 +4,6 @@ class TruthOrLieController < ApplicationController
   include WebsocketAccessCookie
 
   def index
-    @props = { statement: "Dummy Statement" }
+    @props = { proposition: Proposition.active.truth_or_lie }
   end
 end
