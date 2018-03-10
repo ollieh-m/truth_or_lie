@@ -17,6 +17,7 @@ class Admin::CoordinatesController < ApplicationController
 
   def restart
     new_proposition = Proposition.activate_new_proposition
+    Vote.all.destroy_all
 
     # trigger background job for this
     Guest.all.each do |guest|

@@ -2,6 +2,9 @@ class Proposition < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
 
   has_many :transitions, class_name: "PropositionTransition", autosave: false
+  has_many :votes
+
+  enum reality: [ :lie, :truth ]
 
   def state_machine
     @state_machine ||= PropositionStateMachine.new(self, transition_class: PropositionTransition,
