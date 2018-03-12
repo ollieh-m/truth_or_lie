@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Vote from './Vote';
+import Result from './Result';
 import React from 'react';
 import WebSocketsService from '../services/WebSocketsService';
 
@@ -21,21 +22,27 @@ export default class TruthOrLie extends React.Component {
   setupWebsockets = () => {
     this.websockets.subscribe(update => {
       if(update.type === 'restart'){
-        this.updateProposition(update.proposition.truth_or_lie)
+        this.updateProposition(update.proposition.truth_or_lie);
+      } else if(update.type === 'reveal'){
+        update.display = true
+        this.updateResult(update);
       };
     })
   }
-
-  // we want to hold statement, result, results, vote - to be updated through an API service (for refresh option) or websocket service
-  // update state here by defining callbacks used in API service
-  // the constructor needs to get the API service to subscribe to websockets straight away
-  // use these three bits of state in three different subcomponents
 
   updateProposition = (proposition) => {
     this.setState({
       ...this.state,
       vote: null,
+      result: null,
       proposition: proposition
+    })
+  }
+
+  updateResult = (result) => {
+    this.setState({
+      ...this.state,
+      result: result
     })
   }
 
@@ -53,6 +60,7 @@ export default class TruthOrLie extends React.Component {
           {this.state.proposition}!
         </h3>
         <Vote onUpdate={this.updateVote} vote={this.state.vote} />
+        <Result onUpdate={this.updateResult} result={this.state.result} />
       </div>
     );
   }

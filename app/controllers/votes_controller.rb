@@ -5,7 +5,7 @@ class VotesController < ApplicationController
       format.json do
         actioned = Actions::Votes::Create.new(params, guest_uuid: cookies.signed[:guest_uuid]).call
         if actioned.success
-          render status: 200
+          render json: {vote: actioned.result.to_s}, status: 200
         else
           render json: {reason: actioned.result[:reason]}, status: actioned.result[:status]
         end

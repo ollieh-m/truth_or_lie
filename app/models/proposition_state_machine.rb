@@ -6,6 +6,6 @@ class PropositionStateMachine
   state :revealed
 
   transition from: :dormant,      to: [:active]
-  transition from: :active,       to: [:revealed]
+  transition from: :active,       to: [:revealed, :dormant]
   transition from: :revealed,     to: [:dormant]
 end

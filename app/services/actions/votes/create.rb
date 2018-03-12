@@ -37,8 +37,9 @@ module Actions
 
       def save_vote
         @save_vote ||= begin
-          if Vote.create(guest: guest, proposition: Proposition.active, choice: params[:vote])
-            OpenStruct.new(success: true)
+          vote = Vote.create(guest: guest, proposition: Proposition.active, choice: params[:vote])
+          if vote
+            OpenStruct.new(success: true, result: vote)
           else
             OpenStruct.new(success: false, result: {status: 400, reason: 'Invalid vote'})
           end

@@ -33,7 +33,7 @@ export default class Vote extends React.Component {
 
   submitVote = (event) => {
     this.api.vote(event.target.value).then(response => {
-      this.props.onUpdate(event.target.value)
+      this.props.onUpdate(response.vote)
     }).catch(error => {
       // call a callback to update parent state with error
       console.log('error', error)
