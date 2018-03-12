@@ -12,21 +12,35 @@ export default class ApiService {
     }
   }
 
-  handleErrors = (response) =>{
-    // can we get the error message from this response object - response.json() returns a promise resolving the message
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-    return response;
+  parseJSON = (response) => {
+    return new Promise((resolve) => response.json()
+      .then((json) => resolve({
+        status: response.status,
+        ok: response.ok,
+        json,
+      })));
+  }
+
+  request = (endpoint, options) => {
+    return new Promise((resolve, reject) => {
+      fetch(endpoint, options)
+        .then(this.parseJSON)
+        .then((response) => {
+          if (response.ok) {
+            return resolve(response.json);
+          }
+          // extract the error from the server's json
+          return reject(response.json.reason);
+        })
+        .catch((error) => reject({
+          networkError: error.message,
+        }));
+    });
   }
 
   vote = (vote) => {
-    return fetch('/votes',
+    return this.request('/votes',
       this.requestTemplate({vote: vote})
-    ).then(
-      this.handleErrors
-    ).then(response => {
-      return response.json()
-    })
+    )
   }
 }
