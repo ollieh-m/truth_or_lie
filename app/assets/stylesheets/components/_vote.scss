@@ -1,0 +1,29 @@
+.vote {
+
+  &.container-fluid {
+    position: fixed;
+    bottom: 0;
+    height: 20%;
+  };
+
+  .col, .row {
+    height: 100%;
+  }
+
+  .col {
+    display: flex;
+    align-items: center;
+  }
+
+  .button {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  input {
+    display: none;
+  }
+
+}

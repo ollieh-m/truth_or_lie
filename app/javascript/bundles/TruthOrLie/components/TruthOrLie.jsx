@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Vote from './Vote';
 import Result from './Result';
+import Proposition from './Proposition';
 import React from 'react';
 import WebSocketsService from '../services/WebSocketsService';
 
@@ -56,9 +57,7 @@ export default class TruthOrLie extends React.Component {
   render() {
     return (
       <div>
-        <h3>
-          {this.state.proposition}!
-        </h3>
+        <Proposition proposition={this.state.proposition} />
         <Vote onUpdate={this.updateVote} vote={this.state.vote} />
         <Result onUpdate={this.updateResult} result={this.state.result} />
       </div>
