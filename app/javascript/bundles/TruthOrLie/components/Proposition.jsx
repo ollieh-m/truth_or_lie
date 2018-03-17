@@ -1,4 +1,5 @@
 import React from 'react';
+import drazFace from 'assets/images/draz.jpg';
 
 export default class Proposition extends React.Component {
 
@@ -8,9 +9,13 @@ export default class Proposition extends React.Component {
 
   render () {
     return (
-      <div className='container-fluid'>
-        <div className='row'>
-          <div className='col'>{ this.props.proposition }</div>
+      <div>
+        <div>
+          <div>{ this.props.proposition }</div>
+        </div>
+        <div className='face'>
+          <img src={drazFace} />
+
         </div>
       </div>
     )
