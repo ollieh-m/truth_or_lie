@@ -36,17 +36,37 @@ export default class Result extends React.Component {
   render () {
     if (this.props.result && this.props.result.display) {
       return (
-        <div>
-          <div>
-            { this.success() }
+        <div className="result">
+          <div className="modal-backdrop"></div>
+          <div className="modal-wrapper">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Modal title</h5>
+                  <button type="button" className="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <div>
+                    { this.success() }
+                  </div>
+                  <div>
+                    { this.result() }
+                  </div>
+                  <div>
+                    { this.overall() }
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <label>
+                    CLOSE
+                    <input type='button' onClick={this.hide}/>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            { this.result() }
-          </div>
-          <div>
-            { this.overall() }
-          </div>
-          <input type='button' onClick={this.hide} />
         </div>
       )
     } else {
