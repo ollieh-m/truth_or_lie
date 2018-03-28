@@ -6,7 +6,10 @@ module WebsocketAccessCookie
   end
 
   def set_websocket_access_cookie
-    unless cookies.signed[:guest_uuid]
+    # every request the guest makes with their guest_uuid cookie triggers an update of the guest record, so we can destroy guests inactive for too long
+    if uuid_cookie
+      Guest.find_by!(uuid: uuid_cookie).touch
+    else
       uuid = loop do
         random_token = SecureRandom.uuid
         break random_token unless Guest.exists?(uuid: random_token)
@@ -15,6 +18,12 @@ module WebsocketAccessCookie
       cookies.signed[:guest_uuid] = {value: uuid, domain: :all}
       Guest.create!(uuid: uuid)
     end
+  end
+
+  private
+
+  def uuid_cookie
+    @uuid_cookie ||= cookies.signed[:guest_uuid]
   end
 
 end

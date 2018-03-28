@@ -1,42 +1,33 @@
 class Admin::CoordinatesController < ApplicationController
 
-  # secure this controller
+  # secure this controller behind basic auth
 
   def show
+    @status = Proposition.current_status
   end
 
+  # we store every guest who starts a session with the site and attempt to broadcast to them all
+  # we could know who is subscribed to actioncable and only use those guests
+  # use this post to get list of guests subscribed to actioncable: https://stackoverflow.com/questions/36106542/how-do-i-find-out-who-is-connected-to-actioncable?noredirect=1&lq=1
+
   def reveal
-    # extract all of this into background job
-
-    proposition = Proposition.active
-    result = proposition.reality
-    overall_results = proposition.votes.proportion_correct(result)
-
-    proposition.transition_to!(:revealed)
-
-    Guest.all.each do |guest|
-      RevealAndRestartChannel.broadcast_to guest, {
-        type: 'reveal',
-        result: result,
-        success: proposition.votes.by_guest(guest).first.try(:choice) == result,
-        overall_results: overall_results
-      }
+    actioned = Actions::Admin::Coordinates::Reveal.new(params).call
+    if actioned.success
+      flash[:notice] = 'Successfully revealed result'
+    else
+      flash[:alert] = actioned.result[:reason]
     end
+    redirect_to :show
   end
 
   def restart
-    # extract all of this into background job
-
-    new_proposition = Proposition.activate_new_proposition
-    Vote.all.destroy_all
-
-    # trigger background job for this
-    Guest.all.each do |guest|
-      RevealAndRestartChannel.broadcast_to guest, {
-        type: 'restart',
-        proposition: new_proposition
-      }
+    actioned = Actions::Admin::Coordinates::Restart.new(params).call
+    if actioned.success
+      flash[:notice] = 'Successfully restarted result'
+    else
+      flash[:alert] = actioned.result[:reason]
     end
+    redirect_to :show
   end
 
 end

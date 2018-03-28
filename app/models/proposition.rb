@@ -23,6 +23,14 @@ class Proposition < ApplicationRecord
   end
   private_class_method :initial_state
 
+  def self.current_status
+    if in_state(:active).count == 1
+      'Active proposition'
+    elsif in_state(:revealed).count == 1
+      'Revealed proposition'
+    end
+  end
+
   def self.active
     in_state(:active).limit(1).first || activate_new_proposition
   end

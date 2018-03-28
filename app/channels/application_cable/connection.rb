@@ -10,7 +10,6 @@ module ApplicationCable
     protected
 
     def find_verified_guest
-      puts cookies.signed[:guest_uuid]
       if guest = Guest.find_by(uuid: cookies.signed[:guest_uuid])
         guest
       else
