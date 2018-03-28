@@ -17,7 +17,7 @@ class Admin::CoordinatesController < ApplicationController
     else
       flash[:alert] = actioned.result[:reason]
     end
-    redirect_to :show
+    redirect_to action: :show
   end
 
   def restart
@@ -27,7 +27,7 @@ class Admin::CoordinatesController < ApplicationController
     else
       flash[:alert] = actioned.result[:reason]
     end
-    redirect_to :show
+    redirect_to action: :show
   end
 
 end
