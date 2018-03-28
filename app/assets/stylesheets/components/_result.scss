@@ -24,4 +24,12 @@
     align-items: center;
     min-height: 100%;
   }
+
+  .modal-header {
+    button {
+      input {
+        position: absolute;
+      }
+    }
+  }
 }

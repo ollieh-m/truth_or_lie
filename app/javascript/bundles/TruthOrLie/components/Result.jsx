@@ -24,7 +24,7 @@ export default class Result extends React.Component {
 
   overall = () => {
     if (this.props.result.overall_results) {
-      return this.props.overall_results
+      return this.props.result.overall_results
     }
   }
 
@@ -42,27 +42,19 @@ export default class Result extends React.Component {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Modal title</h5>
-                  <button type="button" className="close" data-dismiss="modal">
+                  <h5 className="modal-title">{ this.success() }</h5>
+                  <button type="button" className="close">
                     <span aria-hidden="true">&times;</span>
+                    <input type='button' onClick={this.hide}/>
                   </button>
                 </div>
                 <div className="modal-body">
                   <div>
-                    { this.success() }
-                  </div>
-                  <div>
                     { this.result() }
-                  </div>
-                  <div>
-                    { this.overall() }
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <label>
-                    CLOSE
-                    <input type='button' onClick={this.hide}/>
-                  </label>
+                  { this.overall() }
                 </div>
               </div>
             </div>
