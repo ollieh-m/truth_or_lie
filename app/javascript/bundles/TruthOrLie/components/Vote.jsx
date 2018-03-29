@@ -11,22 +11,18 @@ export default class Vote extends React.Component {
   options = () => {
     return (
       <div className='container-fluid vote'>
-        <div className='row'>
+        <div className='row no-gutters'>
           <div className='col'>
-            <div className='button'>
-              <label>
-                TRUTH
-                <input type='button' onClick={this.submitVote} value='truth'/>
-              </label>
-            </div>
+            <label className='panel truth'>
+              <span>TRUTH</span>
+              <input type='button' onClick={this.submitVote} value='truth'/>
+            </label>
           </div>
           <div className='col'>
-            <div className='button'>
-              <label>
-                LIE
-                <input type='button' onClick={this.submitVote} value='lie'/>
-              </label>
-            </div>
+            <label className='panel lie'>
+              <span>LIE</span>
+              <input type='button' onClick={this.submitVote} value='lie'/>
+            </label>
           </div>
         </div>
       </div>
@@ -35,10 +31,24 @@ export default class Vote extends React.Component {
 
   confirmation = () => {
     return (
-      <div>
-        You think it's {this.props.vote}
+      <div className='container-fluid confirmation'>
+        <div className='row no-gutters'>
+          <div className='col'>
+            <div className={ "panel " + this.props.vote }>
+              <span>{ "You think it's " + this.formatVote() }</span>
+            </div>
+          </div>
+        </div>
       </div>
     )
+  }
+
+  formatVote = () => {
+    if (this.props.vote === 'lie') {
+      return 'a lie'
+    } else {
+      return 'true'
+    }
   }
 
   submitVote = (event) => {

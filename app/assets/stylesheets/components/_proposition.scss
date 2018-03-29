@@ -10,91 +10,65 @@
       min-height: 100px;
       display: flex;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 18px;
 
       position:relative;
-      padding:50px 15px;
-      border:10px solid #5a8f00;
       color:#333;
-      background:#fff;
+      background: $color-accent;
       /* css3 */
       -webkit-border-radius:20px;
       -moz-border-radius:20px;
-      border-radius:20px;
+      border-radius:15px;
     }
 
     .content {
       width: 100%;
       text-align: center;
+      font-family: $font-main;
+      font-size: 2em;
+      line-height: 0.9;
     }
 
-    /* creates larger curve */
     .wrapper:before {
       content:"";
       position:absolute;
-      z-index:10;
-      bottom:-40px;
-      left:250px;
-      width:50px;
+      z-index:-1;
+      bottom:-30px;
+      right:10%;
       height:30px;
-      border-style:solid;
-      border-width:0 10px 10px 0;
-      border-color:#5a8f00;
-      background:transparent;
+      border-right:60px solid $color-accent;
+      background:$color-accent; /* need this for webkit - bug in handling of border-radius */
       /* css3 */
       -webkit-border-bottom-right-radius:80px 50px;
       -moz-border-radius-bottomright:80px 50px;
       border-bottom-right-radius:80px 50px;
-      /* reduce the damage in FF3.0 */
-      display:block;
+      /* using translate to avoid undesired appearance in CSS2.1-capabable but CSS3-incapable browsers */
+      -webkit-transform:translate(0, -2px);
+      -moz-transform:translate(0, -2px);
+      -ms-transform:translate(0, -2px);
+      -o-transform:translate(0, -2px);
+      transform:translate(0, -2px);
     }
 
-    /* creates smaller curve */
     .wrapper:after {
       content:"";
       position:absolute;
-      z-index:10;
-      bottom:-40px;
-      left:250px;
-      width:20px;
+      z-index:-1;
+      bottom:-30px;
+      right:10%;
+      width:60px;
       height:30px;
-      border-style:solid;
-      border-width:0 10px 10px 0;
-      border-color:#5a8f00;
-      background:transparent;
+      background: $color-background;
       /* css3 */
       -webkit-border-bottom-right-radius:40px 50px;
       -moz-border-radius-bottomright:40px 50px;
       border-bottom-right-radius:40px 50px;
-      /* reduce the damage in FF3.0 */
-      display:block;
-    }
-
-    /* creates a small circle to produce a rounded point where the two curves meet */
-    .wrapper > :first-child:before {
-      content:"";
-      position:absolute;
-      bottom:-40px;
-      z-index: 1;
-      left:247px;
-      width:10px;
-      height:10px;
-      background:#5a8f00;
-      /* css3 */
-      -webkit-border-radius:10px;
-      -moz-border-radius:10px;
-      border-radius:10px;
-    }
-
-    /* creates a white rectangle to cover part of the oval border*/
-    .wrapper > :first-child:after {
-      content:"";
-      position:absolute;
-      bottom:-10px;
-      left:270px;
-      width:20px;
-      height:15px;
-      background:#fff;
+      /* using translate to avoid undesired appearance in CSS2.1-capabable but CSS3-incapable browsers */
+      -webkit-transform:translate(-30px, -2px);
+      -moz-transform:translate(-30px, -2px);
+      -ms-transform:translate(-30px, -2px);
+      -o-transform:translate(-30px, -2px);
+      transform:translate(-30px, -2px);
     }
 
   }

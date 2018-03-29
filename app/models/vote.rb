@@ -11,6 +11,6 @@ class Vote < ApplicationRecord
   end
 
   def to_s
-    choice == 0 ? 'lie' : 'truth'
+    choice
   end
 end

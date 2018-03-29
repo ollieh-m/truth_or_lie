@@ -1,14 +1,12 @@
-class Admin::CoordinatesController < ApplicationController
-
-  # secure this controller behind basic auth
+class Admin::CoordinatesController < Admin::BaseController
 
   def show
     @status = Proposition.current_status
   end
 
-  # we store every guest who starts a session with the site and attempt to broadcast to them all
-  # we could know who is subscribed to actioncable and only use those guests
   # use this post to get list of guests subscribed to actioncable: https://stackoverflow.com/questions/36106542/how-do-i-find-out-who-is-connected-to-actioncable?noredirect=1&lq=1
+  # only broadcast to them
+  # also delete stale guests
 
   def reveal
     actioned = Actions::Admin::Coordinates::Reveal.new(params).call

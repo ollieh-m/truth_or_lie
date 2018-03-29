@@ -1,5 +1,10 @@
 @import "bootstrap";
 
+@import "base/variables";
+@import "base/background";
+@import "base/fonts";
+
 @import "components/vote";
 @import "components/proposition";
 @import "components/result";
+

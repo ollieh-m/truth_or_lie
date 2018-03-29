@@ -1,8 +1,11 @@
-.vote {
+.vote, .confirmation {
+
+  font-family: $font-main;
+  line-height: 0.9;
 
   &.container-fluid {
     position: fixed;
-    bottom: 0;
+    bottom: 15px;
     height: 15%;
   };
 
@@ -10,16 +13,27 @@
     height: 100%;
   }
 
-  .col {
-    display: flex;
-    align-items: center;
-  }
+  .panel {
+    font-size: 3em;
 
-  .button {
-    height: 80%;
+    height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    color: white;
+
+    span {
+      width: 100%;
+    }
+
+    &.lie {
+      background-color: $color-red;
+    }
+    &.truth {
+      background-color: $color-green;
+    }
   }
 
   input {
