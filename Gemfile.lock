@@ -61,6 +61,7 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crass (1.0.3)
+    dotenv (2.2.0)
     erubi (1.7.0)
     execjs (2.7.0)
     ffi (1.9.23)
@@ -201,6 +202,7 @@ DEPENDENCIES
   bootstrap
   byebug
   coffee-rails (~> 4.2)
+  dotenv
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
