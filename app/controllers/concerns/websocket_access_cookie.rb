@@ -15,7 +15,7 @@ module WebsocketAccessCookie
         break random_token unless Guest.exists?(uuid: random_token)
       end
 
-      cookies.signed[:guest_uuid] = {value: uuid, domain: :all}
+      cookies.signed[:guest_uuid] = {value: uuid, domain: ENV['APPLICATION_DOMAIN']}
       Guest.create!(uuid: uuid)
     end
   end
@@ -24,7 +24,6 @@ module WebsocketAccessCookie
 
   def uuid_cookie
     @uuid_cookie ||= begin
-      puts 'guest uuid cookie' + cookies.signed[:guest_uuid].to_s
       cookies.signed[:guest_uuid]
     end
   end
