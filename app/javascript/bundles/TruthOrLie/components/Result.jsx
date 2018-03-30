@@ -24,7 +24,7 @@ export default class Result extends React.Component {
 
   overall = () => {
     if (this.props.result.overall_results) {
-      return this.props.result.overall_results
+      return "Overall, " + this.props.result.overall_results + " got that right"
     }
   }
 

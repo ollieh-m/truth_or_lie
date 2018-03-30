@@ -25,6 +25,16 @@
     min-height: 100%;
   }
 
+  .modal-content {
+    font-family: $font-main;
+    line-height: 0.9;
+    background-color: $color-accent;
+
+    .modal-title, .modal-body {
+      font-size: 2em;
+    }
+  }
+
   .modal-header {
     button {
       input {
