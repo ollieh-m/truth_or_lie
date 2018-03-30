@@ -4,5 +4,5 @@ development:
   channel_prefix: tag_along_development
 production:
   adapter: redis
-  url: <%= ENV['REDIS_URL'] %>
+  url: <%= ENV['REDISTOGO_URL'] %>
   channel_prefix: tag_along_production
