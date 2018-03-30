@@ -23,7 +23,10 @@ module WebsocketAccessCookie
   private
 
   def uuid_cookie
-    @uuid_cookie ||= cookies.signed[:guest_uuid]
+    @uuid_cookie ||= begin
+      puts 'guest uuid cookie' + cookies.signed[:guest_uuid]
+      cookies.signed[:guest_uuid]
+    end
   end
 
 end
