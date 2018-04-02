@@ -32,7 +32,11 @@ class Proposition < ApplicationRecord
   end
 
   def self.active
-    in_state(:active).limit(1).first || activate_new_proposition
+    if in_state(:active).limit(1).first
+      in_state(:active).limit(1).first
+    elsif in_state(:revealed).count == 0
+      activate_new_proposition
+    end
   end
 
   def self.random
