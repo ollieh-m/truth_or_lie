@@ -32,6 +32,8 @@ gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'clockwork', '~> 2.0', :git => 'https://github.com/Rykian/clockwork.git'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

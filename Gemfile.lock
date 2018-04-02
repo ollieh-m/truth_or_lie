@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/Rykian/clockwork.git
+  revision: e929014841968640e7050f32adc16dd0c0dad472
+  specs:
+    clockwork (2.0.3)
+      activesupport
+      tzinfo
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -201,6 +209,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap
   byebug
+  clockwork (~> 2.0)!
   coffee-rails (~> 4.2)
   dotenv
   jbuilder (~> 2.5)
