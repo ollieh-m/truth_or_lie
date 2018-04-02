@@ -4,6 +4,6 @@ require 'clockwork'
 
 module Clockwork
   every(2.minutes, 'RevealAndRestartProposition') do
-    `rake reveal_and_restart`
+    RevealAndRestartJob.perform_later
   end
 end
