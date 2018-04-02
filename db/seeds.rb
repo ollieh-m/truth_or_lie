@@ -1,3 +1,9 @@
-Proposition.create!(truth_or_lie: "I went on a date with a girl who didn't exist", reality: 'truth')
-Proposition.create!(truth_or_lie: "I've had my back lasered to remove hair", reality: 'truth')
-Proposition.create!(truth_or_lie: "I ran down Primrose Hill stark naked", reality: 'truth')
+propositions = YAML.load_file(Rails.root.join('db', 'propositions.yml'))
+
+propositions.each do |proposition|
+  if existing_proposition = Proposition.find_by(truth_or_lie: proposition[:truth_or_lie])
+    existing_proposition.update_attributes!(proposition)
+  else
+    Proposition.create!(proposition)
+  end
+end
