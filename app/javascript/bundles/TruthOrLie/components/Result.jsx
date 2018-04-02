@@ -43,10 +43,10 @@ export default class Result extends React.Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title">{ this.success() }</h5>
-                  <button type="button" className="close">
+                  <label className="close">
                     <span aria-hidden="true">&times;</span>
                     <input type='button' onClick={this.hide}/>
-                  </button>
+                  </label>
                 </div>
                 <div className="modal-body">
                   <div>
