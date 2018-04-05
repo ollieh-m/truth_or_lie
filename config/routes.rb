@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   get 'truth_or_lie', to: 'truth_or_lie#index'
+  root to: 'truth_or_lie#index'
 
   resources :votes, only: [:create]
 
