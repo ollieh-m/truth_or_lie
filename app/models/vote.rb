@@ -7,7 +7,12 @@ class Vote < ApplicationRecord
   scope :by_guest, -> (guest) { where(guest: guest) }
 
   def self.proportion_correct(result)
-    ((where(choice: result).count.to_f / count) * 100).round
+    all_votes = all.count
+    if all_votes > 0
+      ((where(choice: result).count.to_f / all_votes) * 100).round
+    else
+      0
+    end
   end
 
   def to_s
