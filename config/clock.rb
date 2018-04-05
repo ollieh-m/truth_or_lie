@@ -3,7 +3,7 @@ require File.expand_path('../environment', __FILE__)
 require 'clockwork'
 
 module Clockwork
-  every(1.minute, 'RevealAndRestartProposition') do
+  every(30.seconds, 'RevealAndRestartProposition') do
     RevealAndRestartJob.perform_later
   end
 end
