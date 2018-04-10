@@ -3,7 +3,7 @@ class RevealAndRestartJob < ApplicationJob
 
   def perform
     puts 'Revealing result'
-    reveal_actioned = Actions::Admin::Coordinates::Reveal.new({}).call
+    reveal_actioned = Actions::Admin::Coordinates::Reveal.new(timestamp: Time.current).call
     puts reveal_actioned.inspect
     sleep(5)
     puts 'Restarting proposition'

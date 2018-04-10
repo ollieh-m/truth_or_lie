@@ -6,6 +6,7 @@
     "actioncable": "^5.1.2",
     "babel-preset-react": "^6.24.1",
     "file-loader": "^1.1.11",
+    "moment": "^2.22.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

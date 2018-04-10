@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import Vote from './Vote';
 import Result from './Result';
 import Proposition from './Proposition';
+import Countdown from './Countdown';
 import React from 'react';
 import WebSocketsService from '../services/WebSocketsService';
+var moment = require('moment');
 
 export default class TruthOrLie extends React.Component {
   static propTypes = {
@@ -13,7 +15,8 @@ export default class TruthOrLie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      proposition: (this.props.proposition || "Please wait a moment...")
+      proposition: (this.props.proposition || "Please wait a moment..."),
+      seconds: 30
     };
 
     this.websockets = new WebSocketsService();
@@ -27,6 +30,7 @@ export default class TruthOrLie extends React.Component {
       } else if(update.type === 'reveal'){
         update.display = true
         this.updateResult(update);
+        this.updateCountdown(update.next_reveal);
       };
     })
   }
@@ -54,10 +58,22 @@ export default class TruthOrLie extends React.Component {
     })
   }
 
+  updateCountdown = (next_reveal) => {
+    if (next_reveal) {
+      var seconds = Math.round(moment.utc(next_reveal).diff(moment.utc()) / 1000)
+
+      this.setState({
+        ...this.state,
+        seconds: seconds
+      })
+    }
+  }
+
   render() {
     return (
       <div>
         <Proposition proposition={this.state.proposition} />
+        <Countdown seconds={this.state.seconds} />
         <Vote onUpdate={this.updateVote} vote={this.state.vote} />
         <Result onUpdate={this.updateResult} result={this.state.result} />
       </div>

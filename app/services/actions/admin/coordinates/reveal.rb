@@ -14,6 +14,7 @@ module Actions
           return check_for_active_proposition unless check_for_active_proposition.success
           return check_proposition_not_revealed unless check_proposition_not_revealed.success
           return get_proposition unless get_proposition.success
+          return next_reveal unless next_reveal.success
           return trigger_broadcast unless trigger_broadcast.success
           return transition_proposition
         end
@@ -44,11 +45,23 @@ module Actions
           end
         end
 
+        def next_reveal
+          @next_reveal ||= begin
+            if params[:timestamp]
+              utc_timestamp = params[:timestamp] + 30.seconds
+              parsed_without_zone = utc_timestamp.to_s[0..-5]
+              OpenStruct.new(success: true, result: parsed_without_zone)
+            else
+              OpenStruct.new(success: true, result: nil)
+            end
+          end
+        end
+
         def trigger_broadcast
           @trigger_broadcast ||= begin
             result = get_proposition.result.reality
             overall_results = get_proposition.result.votes.proportion_correct(result)
-            RevealJob.perform_later(get_proposition.result, result, overall_results)
+            RevealJob.perform_later(get_proposition.result, result, overall_results, next_reveal.result)
             OpenStruct.new(success: true)
           end
         end
