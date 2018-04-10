@@ -26,7 +26,7 @@ export default class Countdown extends React.Component {
   }
 
   changeSeconds = () => {
-    if (this.state.seconds == 0) {
+    if (this.state.seconds == 0 || this.state.seconds == null) {
       clearInterval(this.countdown)
     } else {
       this.setState((state) => ({seconds : state.seconds - 1}) )
@@ -34,15 +34,19 @@ export default class Countdown extends React.Component {
   }
 
   render () {
-    return (
-      <div className='container-fluid proposition'>
-        <div className='row'>
-          <div className='col'>
-            { "Revealing the truth in " + this.state.seconds + " seconds" }
+    if (this.state.seconds) {
+      return (
+        <div className='container-fluid proposition'>
+          <div className='row'>
+            <div className='col'>
+              { "Revealing the truth in " + this.state.seconds + " seconds" }
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return null
+    }
   }
 
 }
