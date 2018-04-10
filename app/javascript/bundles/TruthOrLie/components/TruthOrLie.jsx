@@ -15,8 +15,7 @@ export default class TruthOrLie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      proposition: (this.props.proposition || "Please wait a moment..."),
-      seconds: 30
+      proposition: (this.props.proposition || "Please wait a moment...")
     };
 
     this.websockets = new WebSocketsService();

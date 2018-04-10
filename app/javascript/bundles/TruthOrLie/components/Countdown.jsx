@@ -12,9 +12,13 @@ export default class Countdown extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    clearInterval(this.countdown);
+
     this.setState({
       seconds: nextProps.seconds
     })
+
+    this.countDownSeconds();
   }
 
   countDownSeconds = () => {
