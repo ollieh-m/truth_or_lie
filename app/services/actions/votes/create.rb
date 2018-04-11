@@ -10,19 +10,9 @@ module Actions
       end
 
       def call
-        return authorize_guest unless authorize_guest.success
         return check_proposition unless check_proposition.success
+        return authorize_guest unless authorize_guest.success
         return save_vote
-      end
-
-      def authorize_guest
-        @authorize_guest ||= begin
-          if args[:guest_uuid] && guest && Proposition.active.votes.by_guest(guest).blank?
-            OpenStruct.new(success: true)
-          else
-            OpenStruct.new(success: false, result: {status: 401, reason: 'Unauthorised'})
-          end
-        end
       end
 
       def check_proposition
@@ -31,6 +21,16 @@ module Actions
             OpenStruct.new(success: true)
           else
             OpenStruct.new(success: false, result: {status: 404, reason: 'No valid propositions'})
+          end
+        end
+      end
+
+      def authorize_guest
+        @authorize_guest ||= begin
+          if args[:guest_uuid] && guest && Proposition.active.votes.by_guest(guest).blank?
+            OpenStruct.new(success: true)
+          else
+            OpenStruct.new(success: false, result: {status: 401, reason: 'Unauthorised'})
           end
         end
       end
