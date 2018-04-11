@@ -4,6 +4,8 @@ export default class Countdown extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {seconds: null}
   }
 
   componentWillReceiveProps(nextProps) {
