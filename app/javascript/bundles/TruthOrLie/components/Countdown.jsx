@@ -4,21 +4,19 @@ export default class Countdown extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      seconds: this.props.seconds
-    }
-
-    this.countDownSeconds();
   }
 
   componentWillReceiveProps(nextProps) {
-    clearInterval(this.countdown);
+    if (nextProps.next_reveal !== this.props.next_reveal) {
+      clearInterval(this.countdown);
 
-    this.setState({
-      seconds: nextProps.seconds
-    })
+      var secondsToNextReveal = Math.round(moment.utc(nextProps.next_reveal).diff(moment.utc()) / 1000)
+      this.setState({
+        seconds: secondsToNextReveal
+      })
 
-    this.countDownSeconds();
+      this.countDownSeconds();
+    }
   }
 
   countDownSeconds = () => {
@@ -36,7 +34,7 @@ export default class Countdown extends React.Component {
   render () {
     if (this.state.seconds) {
       return (
-        <div className='container-fluid proposition'>
+        <div className='container-fluid'>
           <div className='row'>
             <div className='col'>
               { "Revealing the truth in " + this.state.seconds + " seconds" }
@@ -45,7 +43,15 @@ export default class Countdown extends React.Component {
         </div>
       )
     } else {
-      return null
+      return (
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col'>
+              { "Revealing the truth soon!" }
+            </div>
+          </div>
+        </div>
+      )
     }
   }
 

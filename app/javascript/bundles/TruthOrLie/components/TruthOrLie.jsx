@@ -59,11 +59,9 @@ export default class TruthOrLie extends React.Component {
 
   updateCountdown = (next_reveal) => {
     if (next_reveal) {
-      var seconds = Math.round(moment.utc(next_reveal).diff(moment.utc()) / 1000)
-
       this.setState({
         ...this.state,
-        seconds: seconds
+        next_reveal: next_reveal
       })
     }
   }
@@ -72,7 +70,7 @@ export default class TruthOrLie extends React.Component {
     return (
       <div>
         <Proposition proposition={this.state.proposition} />
-        <Countdown seconds={this.state.seconds} />
+        <Countdown next_reveal={this.state.next_reveal} />
         <Vote onUpdate={this.updateVote} vote={this.state.vote} />
         <Result onUpdate={this.updateResult} result={this.state.result} />
       </div>
