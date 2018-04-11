@@ -1,4 +1,5 @@
 import React from 'react';
+var moment = require('moment');
 
 export default class Countdown extends React.Component {
 

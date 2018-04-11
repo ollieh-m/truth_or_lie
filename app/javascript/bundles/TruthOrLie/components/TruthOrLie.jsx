@@ -5,7 +5,6 @@ import Proposition from './Proposition';
 import Countdown from './Countdown';
 import React from 'react';
 import WebSocketsService from '../services/WebSocketsService';
-var moment = require('moment');
 
 export default class TruthOrLie extends React.Component {
   static propTypes = {
