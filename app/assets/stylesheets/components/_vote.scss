@@ -1,15 +1,20 @@
-.vote, .confirmation {
+.fixedBottom {
+  position: fixed;
+  bottom: 15px;
+  height: 20%;
+  display: flex;
+  flex-direction: column-reverse;
+}
 
+.vote, .confirmation {
   font-family: $font-main;
   line-height: 0.9;
 
-  &.container-fluid {
-    position: fixed;
-    bottom: 15px;
-    height: 15%;
+  &.row {
+    height: 73%;
   };
 
-  .col, .row {
+  .col {
     height: 100%;
   }
 
@@ -39,5 +44,4 @@
   input {
     display: none;
   }
-
 }

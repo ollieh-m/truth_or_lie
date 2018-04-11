@@ -37,21 +37,17 @@ export default class Countdown extends React.Component {
   render () {
     if (this.state.seconds) {
       return (
-        <div className='container-fluid'>
-          <div className='row'>
-            <div className='col'>
-              { "Revealing the truth in " + this.state.seconds + " seconds" }
-            </div>
+        <div className='row countdown'>
+          <div className='col'>
+            <span>{ "Revealing the truth in " + this.state.seconds + " seconds" }</span>
           </div>
         </div>
       )
     } else {
       return (
-        <div className='container-fluid'>
-          <div className='row'>
-            <div className='col'>
-              { "Revealing the truth soon!" }
-            </div>
+        <div className='row countdown'>
+          <div className='col'>
+            <span>{ "Revealing the truth soon!" }</span>
           </div>
         </div>
       )

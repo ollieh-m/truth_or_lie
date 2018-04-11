@@ -10,20 +10,18 @@ export default class Vote extends React.Component {
 
   options = () => {
     return (
-      <div className='container-fluid vote'>
-        <div className='row no-gutters'>
-          <div className='col'>
-            <label className='panel truth'>
-              <span>TRUTH</span>
-              <input type='button' onClick={this.submitVote} value='truth'/>
-            </label>
-          </div>
-          <div className='col'>
-            <label className='panel lie'>
-              <span>LIE</span>
-              <input type='button' onClick={this.submitVote} value='lie'/>
-            </label>
-          </div>
+      <div className='row no-gutters vote'>
+        <div className='col'>
+          <label className='panel truth'>
+            <span>TRUTH</span>
+            <input type='button' onClick={this.submitVote} value='truth'/>
+          </label>
+        </div>
+        <div className='col'>
+          <label className='panel lie'>
+            <span>LIE</span>
+            <input type='button' onClick={this.submitVote} value='lie'/>
+          </label>
         </div>
       </div>
     )
@@ -31,12 +29,10 @@ export default class Vote extends React.Component {
 
   confirmation = () => {
     return (
-      <div className='container-fluid confirmation'>
-        <div className='row no-gutters'>
-          <div className='col'>
-            <div className={ "panel " + this.props.vote }>
-              <span>{ "You think it's " + this.formatVote() }</span>
-            </div>
+      <div className='row no-gutters confirmation'>
+        <div className='col'>
+          <div className={ "panel " + this.props.vote }>
+            <span>{ "You think it's " + this.formatVote() }</span>
           </div>
         </div>
       </div>

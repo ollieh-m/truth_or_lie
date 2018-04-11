@@ -69,8 +69,10 @@ export default class TruthOrLie extends React.Component {
     return (
       <div>
         <Proposition proposition={this.state.proposition} />
-        <Countdown next_reveal={this.state.next_reveal} />
-        <Vote onUpdate={this.updateVote} vote={this.state.vote} />
+        <div className="fixedBottom container-fluid">
+          <Vote onUpdate={this.updateVote} vote={this.state.vote} />
+          <Countdown next_reveal={this.state.next_reveal} />
+        </div>
         <Result onUpdate={this.updateResult} result={this.state.result} />
       </div>
     );
