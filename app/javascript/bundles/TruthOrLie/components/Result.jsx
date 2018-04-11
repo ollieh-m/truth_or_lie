@@ -23,7 +23,7 @@ export default class Result extends React.Component {
   }
 
   overall = () => {
-    if (this.props.result.overall_results) {
+    if (this.props.result.overall_results !== null) {
       return "Overall, " + this.props.result.overall_results + "% got that right"
     }
   }
